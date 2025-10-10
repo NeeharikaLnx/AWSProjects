@@ -1,0 +1,22 @@
+Serverless Marketing Analytics Pipeline
+Project Overview
+
+This project demonstrates a fully serverless data analytics pipeline on AWS, designed to automate marketing campaign reporting. It ingests raw campaign data, transforms it using ETL workflows, and provides actionable insights through interactive dashboards—all without manual intervention.
+
+Key Features
+
+Data Storage: Uses S3 as a scalable, cost-effective data lake for raw and processed data.
+
+Serverless Processing: Python Lambda functions automatically process incoming campaign data.
+
+ETL Automation: AWS Glue jobs clean and transform raw data for analysis.
+
+Analytics & Visualization: Athena queries the transformed data, and QuickSight dashboards provide interactive insights.
+
+Monitoring & Alerts: SNS notifies stakeholders of job successes or failures.
+
+Impact
+
+Reduced manual reporting from 4 hours to 10 minutes, enabling near real-time decision-making for marketing teams.
+
+Demonstrates best practices in serverless architecture, IAM roles, and automated data pipelines on AWS.

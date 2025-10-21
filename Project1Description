@@ -1,22 +1,115 @@
-Serverless Marketing Analytics Pipeline
-Project Overview
+🌐 Project 1: Static Website Hosting on AWS (Beginner Level)
 
-This project demonstrates a fully serverless data analytics pipeline on AWS, designed to automate marketing campaign reporting. It ingests raw campaign data, transforms it using ETL workflows, and provides actionable insights through interactive dashboards—all without manual intervention.
+Goal:
+Deploy a simple personal or portfolio website on AWS using S3, CloudFront, and Route 53 — demonstrating your understanding of AWS compute, storage, networking, and security fundamentals.
 
-Key Features
+🧱 Architecture Overview
 
-Data Storage: Uses S3 as a scalable, cost-effective data lake for raw and processed data.
+Services used:
 
-Serverless Processing: Python Lambda functions automatically process incoming campaign data.
+Amazon S3 – Store static files (HTML, CSS, JS, images)
 
-ETL Automation: AWS Glue jobs clean and transform raw data for analysis.
+Amazon CloudFront – Content Delivery Network (CDN) to cache and deliver your website globally
 
-Analytics & Visualization: Athena queries the transformed data, and QuickSight dashboards provide interactive insights.
+Amazon Route 53 – Domain registration and DNS routing (optional but good practice)
 
-Monitoring & Alerts: SNS notifies stakeholders of job successes or failures.
+AWS Certificate Manager (ACM) – For HTTPS/SSL security
 
-Impact
+IAM – Manage permissions for secure access to your resources
 
-Reduced manual reporting from 4 hours to 10 minutes, enabling near real-time decision-making for marketing teams.
+Architecture Diagram (conceptually):
 
-Demonstrates best practices in serverless architecture, IAM roles, and automated data pipelines on AWS.
+User → CloudFront (CDN) → S3 Bucket (Static Website Hosting)
+                  ↓
+               Route 53 (optional)
+
+⚙️ Step-by-Step Setup
+Step 1: Prepare your static website files
+
+Create a simple index.html page with “Hello from AWS!” or your portfolio layout.
+
+Folder example:
+
+/my-aws-site
+ ├── index.html
+ ├── about.html
+ └── style.css
+
+Step 2: Create an S3 bucket
+
+Go to AWS Console → S3 → Create Bucket
+
+Name: yourname-website (must be globally unique)
+
+Region: Choose close to you (e.g., us-east-1)
+
+Uncheck “Block all public access” (we’ll manage security manually)
+
+Upload your website files.
+
+Step 3: Enable static website hosting
+
+Inside the S3 bucket → Properties tab → Static website hosting → Enable
+
+Note the endpoint URL (something like http://yourname-website.s3-website-us-east-1.amazonaws.com).
+
+Step 4: Configure bucket policy (to make content public)
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::yourname-website/*"
+    }
+  ]
+}
+
+
+✅ Principle used: Dive Deep — understanding IAM and permissions.
+
+Step 5: Add CloudFront (optional but recommended)
+
+Create a CloudFront distribution:
+
+Origin Domain: Your S3 website endpoint.
+
+Enable Redirect HTTP to HTTPS.
+
+Attach an SSL certificate from AWS Certificate Manager.
+
+Result: a fast, secure, globally distributed website.
+
+Step 6: (Optional) Set up a custom domain
+
+Buy/register your domain in Route 53.
+
+Create a CNAME/A record pointing to your CloudFront distribution.
+
+🧠 What You’ll Learn
+
+AWS storage & web hosting basics
+
+IAM policies and bucket permissions
+
+CDN caching and HTTPS with CloudFront
+
+Networking (DNS, domains, routing) fundamentals
+
+How to document & present an architecture diagram
+
+💡 How to Present This in Your Interview
+
+Context: “I built a static web application using AWS services to understand the fundamentals of cloud architecture.”
+Key talking points:
+
+Used S3 for durable, cost-efficient hosting.
+
+Secured access via IAM policies and HTTPS using CloudFront + ACM.
+
+Implemented DNS routing using Route 53.
+
+Improved page load time by X % using CloudFront caching.
+Leadership Principles: Learn & Be Curious, Ownership, Deliver Results.
